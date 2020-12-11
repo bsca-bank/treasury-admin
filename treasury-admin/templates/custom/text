@@ -1,0 +1,3 @@
+{% for obj in objs %}            
+<li>{{ obj }}</li>        
+{% endfor %}    

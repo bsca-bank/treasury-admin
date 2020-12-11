@@ -1,0 +1,19 @@
+{% extends "admin/base_site.html" %} {% block content %}
+<form method="post" action="{{ path }}">        
+    {% csrf_token %}        
+    {{ form }}       
+    <p>            
+        <input type="hidden" name="action" value="{{ action }}" />
+        <input type="submit" name="cancel" value="Annuler" />
+        <input type="submit" name="apply" value="Valider"/>  
+        <input type="submit" name="return" value="Return"/>  
+    </p>    
+</form>    
+<p>Batch Number: {{ batch_no }}</p>
+<br>
+<p>Please confirm appling action "{{ action }}" to the following records</p>    
+<ul>        
+    {% for obj in objs %}            
+        <li>{{ obj }}</li>        
+    {% endfor %}    
+</ul>{% endblock %}

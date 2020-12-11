@@ -1,0 +1,31 @@
+Cher client,
+Nous vous informons par la présente de la situation de votre dossier de domiciliation:
+
+Type d'opération: {{type_operation}}
+Objet: {{type_action}}
+Pour: {{nomenc}}
+No.: {{ref_exec}}
+Montant de transaction: {{ccy}} {{montant}}
+Date de valeur: {{date_val}}
+Référence de la déclaration: {{ref_di}}
+Intitulé du compte: {{cli_fullname}}
+Code client: {{cli_code}}
+Date de Notification: {{date_notif}}
+Référence Interne de la domiciliation: {{dom_id}}
+Référence Interne du transfert: {{trf_id}}
+
+Conformément aux dispositions du Règlement n°02/18/CEMAC/UMAC/CM portant REGLEMENTATION DES CHANGES DANS LA CEMAC et des Instructions qui précisent certaines de ses dispositions, 
+veuillez trouver ci-après les manquements constatés dans votre dossier de domiciliation qui requièrent un complément de pièces/d'informations pour son apurement:
+
+{% if obs %}
+    {{obs}}
+{% else %}
+    Nous n'avons pas reçu votre dossier d'apurement.
+{% endif %}
+
+---------------------------------------------------------- 
+Pour faciliter le traitement de votre opération, nous vous prions de déposer les documents exigés à l'accueil de la banque. Merci pour votre coopération.  
+La Direction des opérations,  
+BANQUE SINO-CONGOLAISE POUR L'AFRIQUE (BSCA.Bank)
+N.B.: La présente adresse mail sert uniquement à la transmission des notifications vous concernant. 
+Elle ne reçoit pas les messages entrants. Veuillez ne pas répondre à ce message. Pour tout besoin de renseignement, veuillez contacter directement votre gestionnaire de compte. 

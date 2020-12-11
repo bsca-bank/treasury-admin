@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %} {% block content %}    
+
+<form method="post" action="{{ path }}">        
+
+    {{ tag_form }}
+
+    {% csrf_token %}        
+    {{ form }}       
+    <p>            
+        <input type="hidden" name="action" value="{{ action }}" />
+        <input type="submit" name="cancel" value="Annuler" />
+        <input type="submit" name="apply" value="Valider"/>        
+    </p>    
+</form>    
+<p>Batch Number: {{ batch_no }}</p>
+<br>
+<p>System will generate email interface file using template chosen for the following records</p>    
+
+<ul>{{ objs|unordered_list }}</ul>
+
+{% endblock %}
+
+
