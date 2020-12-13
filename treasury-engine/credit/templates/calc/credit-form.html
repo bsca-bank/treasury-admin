@@ -1,0 +1,194 @@
+<form id="creditForm" method="get" action="/stream" novalidate>
+    <div class="row">
+
+        <div class="col-md-4">
+            <!--principal-->
+            <div class="form-group row">
+                <label for="id_principal" class="col-md-5 col-form-label">Principal</label>
+                <div class="col-md-7">
+                    <input type="text" name="principal" class="form-control" aria-expanded="false" required
+                           id="id_principal"
+                           value={% if principal %}{{ principal }}{% else %}"100000000"{% endif %}>
+                </div>
+                <div class="col-md-12">
+                    <div class="collapse" id="credit-collapse" name="principal">
+                        <div class="card card-body">
+                            <p>Montant total du principal<i> en XAF</i>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--interest_rate-->
+            <div class="form-group row">
+                <label for="id_interest_rate" class="col-md-5 col-form-label">Interest Rate</label>
+                <div class="col-md-7">
+                    <div class="input-group">
+                        <input type="number" name="interest_rate" min="0" max="100" step="0.1" class="form-control"
+                               required id="id_interest_rate" value={% if interest_rate %}{{ interest_rate }}{% else %}"5"{% endif %}>
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="collapse" id="credit-collapse" name="interest_rate">
+                        <div class="card card-body">
+                            <p>Interest rate annuel<i> en pourcentage</i>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--nb_year-->
+            <div class="form-group row">
+                <label for="id_nb_year" class="col-md-5 col-form-label">Number of years</label>
+                <div class="col-md-7">
+                    <input type="text" name="nb_year" class="form-control" aria-expanded="false" required
+                           id="id_nb_year"
+                           value={% if nb_year %}{{ nb_year }}{% else %}"5"{% endif %}>
+                </div>
+                <div class="col-md-12">
+                    <div class="collapse" id="credit-collapse" name="nb_year">
+                        <div class="card card-body">
+                            <p>Number of years</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--nb_payments_year-->
+            <div class="form-group row">
+                <label for="id_nb_payments_year" class="col-md-5 col-form-label">Nb.Payments/Year</label>
+                <div class="col-md-7">
+                    <input type="text" name="nb_payments_year" class="form-control" aria-expanded="false" required
+                           id="id_nb_payments_year"
+                           value={% if nb_payments_year %}{{ nb_payments_year }}{% else %}"12"{% endif %}>
+                </div>
+                <div class="col-md-12">
+                    <div class="collapse" id="credit-collapse" name="nb_payments_year">
+                        <div class="card card-body">
+                            <p>Number of payments per year</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <!--amortization_type-->
+            <div class="form-group row">
+                <label for="id_amortization_type" class="col-md-5 col-form-label">Amort Type</label>
+                <div class="col-md-7">
+                    <select name="amortization_type" id="id_amortization_type" class="form-control"
+                            aria-expanded="false">
+                        <option value="1" {% if amortization_type == 1 %}selected{% endif %}>Constant PMT</option>
+                        <option value="2" {% if amortization_type == 2 %}selected{% endif %}>Constant p-PMT</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <div class="collapse" id="credit-collapse" name="amortization_type">
+                        <div class="card card-body">
+                            <p>Top marginal tax rate for your income - the higher your tax rate, the bigger the benefit
+                                of the mortgage interest and property tax deductions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+               aria-controls="collapseExample">
+                Advanced options
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body p-3 mb-2 bg-light text-dark">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <!--grace_period_in_month-->
+                            <div class="form-group row">
+                                <label for="id_grace_period_in_month" class="col-md-5 col-form-label">Grace
+                                    period</label>
+                                <div class="col-md-7">
+                                    <div class="input-group">
+                                        <input type="number" name="grace_period_in_month" min="0" max="100" step="1"
+                                               class="form-control" required
+                                               id="id_grace_period_in_month"
+                                               value={% if grace_period_in_month %}{{ grace_period_in_month }}{% else %}"0"{% endif %}>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="collapse" id="credit-collapse" name="grace_period_in_month">
+                                        <div class="card card-body">
+                                            <p> Grace period in number of month (see below).</p>
+                                            <p><b>Annualized returns to Dec 2017 by purchase year</b></p>
+                                            {% include "calc/appreciation-table.html" %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--tax_rate-->
+                            <div class="form-group row">
+                                <label for="id_tax_rate" class="col-md-5 col-form-label">VAT Rate</label>
+                                <div class="col-md-7">
+                                    <div class="input-group">
+                                        <input type="number" name="tax_rate" min="0" max="100" step="0.01"
+                                               class="form-control"
+                                               required id="id_tax_rate" value="18.90"/>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="collapse" id="credit-collapse" name="tax_rate">
+                                        <div class="card card-body">
+                                            <p>Top marginal state tax rate - the higher your tax rate, the bigger the
+                                                benefit of the mortgage interest tax deduction.</p>
+                                            <p>For reference: <a
+                                                    href="https://www.tax-brackets.org/">tax-brackets.org</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-link" id="reset_defaults" type="button">Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-info btn-lg" id="calculate">Calculate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
